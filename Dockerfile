@@ -4,7 +4,7 @@ LABEL maintainer="Nate Wilken <wilken@asu.edu>"
 COPY google-chrome.repo /etc/yum.repos.d/
 
 RUN yum update -y && \
-    yum install -y wget curl tar unzip chrome-stable xorg-x11-server-Xvfb && \
+    yum install -y wget curl tar unzip google-chrome-stable xorg-x11-server-Xvfb && \
     yum clean all && \
     rm -rf /var/cache/yum
 
@@ -24,6 +24,7 @@ RUN CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_R
 WORKDIR /aat
 
 RUN adduser -U testuser && \
-    chown -R testuser:testuser .
+    chown -R testuser:testuser . && \
+    chmod -R 755 .
     
 USER testuser
