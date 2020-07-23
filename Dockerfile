@@ -5,6 +5,7 @@ COPY google-chrome.repo /etc/yum.repos.d/
 
 RUN yum update -y && \
     yum install -y wget curl tar unzip google-chrome-stable xorg-x11-server-Xvfb && \
+    sed -i 's/"$HERE\/chrome"/"$HERE\/chrome" --no-sandbox/g' /opt/google/chrome/google-chrome && \
     yum clean all && \
     rm -rf /var/cache/yum
 
